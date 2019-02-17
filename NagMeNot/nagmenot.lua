@@ -52,7 +52,7 @@ windower.register_event('incoming chunk', function(id,original,modified,injected
 	if id == 0x00A then
 		local packet = packets.parse('incoming', original)
 		if packet['Menu ID']==30004 then --MH Set Home Point
-			coroutine.schedule(functions.prepare(respond,30004), 0.2)
+			coroutine.schedule(functions.prepare(respond,packet['Menu ID']), 0.2)
 			packet['Menu Zone'] = 0
 			packet['Menu ID'] = 0
 			return packets.build(packet)
