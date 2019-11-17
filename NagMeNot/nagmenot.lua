@@ -50,7 +50,7 @@ function respond(menu_id, option, target)
     packets.inject(menu_response_packet)
 end
 
-windower.register_event('incoming chunk', function(id,original,modified,injected,blocked)
+windower.register_event('incoming chunk', function(id, original, modified, injected, blocked)
   if id == 0x00A then --[[Zone Packet]]
     local packet = packets.parse('incoming', original)
     if packet['Menu ID'] == MOG_EXIT_MENU_ID then
