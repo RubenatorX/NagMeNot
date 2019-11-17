@@ -54,7 +54,7 @@ windower.register_event('incoming chunk', function(id,original,modified,injected
   if id == 0x00A then --[[Zone Packet]]
     local packet = packets.parse('incoming', original)
     if packet['Menu ID'] == MOG_EXIT_MENU_ID then
-      coroutine.schedule(functions.prepare(respond,MOG_EXIT_MENU_ID), 0.2)
+      coroutine.schedule(functions.prepare(respond, MOG_EXIT_MENU_ID), 0.2)
       packet['Menu Zone'] = 0
       packet['Menu ID'] = 0
       return packets.build(packet)
