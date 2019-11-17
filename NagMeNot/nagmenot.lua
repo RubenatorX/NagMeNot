@@ -39,7 +39,7 @@ local packets = require("packets")
 function respond(menu_id, option, target)
   option = option or RESPOND_NO
   target = target or windower.ffxi.get_player()
-  local menu_response_packet = packets.new('outgoing', 0x05B, {
+  local menu_response_packet = packets.new('outgoing', 0x05B --[[Menu Response]], {
       ['Target'] = target.id,
       ['Option Index'] = option,
       ['Target Index'] = target.index,
@@ -51,9 +51,9 @@ function respond(menu_id, option, target)
 end
 
 windower.register_event('incoming chunk', function(id,original,modified,injected,blocked)
-  if id == 0x00A then
+  if id == 0x00A then --[[Zone Packet]]
     local packet = packets.parse('incoming', original)
-    if packet['Menu ID']==MOG_EXIT_MENU_ID then
+    if packet['Menu ID'] == MOG_EXIT_MENU_ID then
       coroutine.schedule(functions.prepare(respond,MOG_EXIT_MENU_ID), 0.2)
       packet['Menu Zone'] = 0
       packet['Menu ID'] = 0
